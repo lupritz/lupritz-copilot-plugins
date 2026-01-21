@@ -1,0 +1,8 @@
+{
+  "name": "copilot-plugins",
+  "metadata": {
+    "description": "GitHub Copilot plugins",
+    "version": "1.0.0"
+  },
+  "plugins": []
+}
