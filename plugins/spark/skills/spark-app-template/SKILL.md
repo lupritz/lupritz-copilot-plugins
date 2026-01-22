@@ -7,7 +7,7 @@ description: Comprehensive guidance for building web apps with opinionated defau
 
 ## Purpose
 
-Spark App Template provides battle-tested defaults and comprehensive guidance for building web applications in 2026. When a user asks to build a web app, this skill provides the complete technical foundation and design direction to create beautiful, functional applications quickly.
+Spark App Template provides defaults and guidance for building web applications. When a user asks to build a web app, this skill provides the technical foundation and design direction to create functional applications.
 
 ## When to Use This Skill
 
@@ -62,7 +62,7 @@ Understanding complexity helps choose the right stack variation and design appro
 
 ## Core Tech Stack (Shared Foundation)
 
-All Spark App Template applications use this battle-tested foundation:
+All Spark App Template applications use this foundation:
 
 ### Build & Development
 - **Build Tool**: Vite (latest stable)
@@ -113,12 +113,12 @@ All variations share the core foundation above. These templates add specific pac
 - **Additive packages**: Zustand (state management), date-fns
 - **Design focus**: Navigation patterns, state architecture, performance
 
-## React 19+ Features (Production-Ready)
+## React 19+ Features
 
 Enable these modern React capabilities:
 
 ### React Compiler
-- **Status**: Production-ready, battle-tested at Meta
+- **Status**: Available in React 19+
 - **Benefits**: Auto-memoization, significantly faster initial loads and interactions
 - **Setup**: Compatible with React 17+, configure via compiler config
 
@@ -467,7 +467,7 @@ If app feels slow:
 
 ### Build Tool Alternatives
 
-Newer Vite versions with Rolldown bundler may offer significantly faster builds when production-ready. Monitor for stable releases.
+Newer Vite versions with Rolldown bundler may offer faster builds when stable. Monitor for stable releases.
 
 ## System Requirements
 
@@ -487,4 +487,4 @@ After scaffolding:
 
 ---
 
-**Remember**: The goal is production-ready, beautiful, and performant web applications. Start simple, iterate based on user needs, and always prioritize user experience over technical complexity.
+**Remember**: The goal is functional and performant web applications. Start simple, iterate based on user needs, and prioritize user experience over technical complexity.

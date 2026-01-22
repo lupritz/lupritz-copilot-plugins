@@ -150,8 +150,8 @@ export function Hero() {
             Build Beautiful Web Experiences
           </h1>
           <p className="mt-6 text-xl leading-relaxed text-muted-foreground">
-            A comprehensive toolkit for creating production-ready applications
-            with exceptional design and performance.
+            A toolkit for creating applications with design and performance
+            in mind.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <Button size="lg">Get Started</Button>

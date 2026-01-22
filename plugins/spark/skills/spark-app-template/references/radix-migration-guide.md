@@ -2,7 +2,7 @@
 
 ## Context
 
-Radix UI, the foundation of shadcn/ui, has received fewer updates since its acquisition by WorkOS. While Radix remains stable and battle-tested, the ecosystem is evolving with new alternatives.
+Radix UI, the foundation of shadcn/ui, has received fewer updates since its acquisition by WorkOS. While Radix remains stable, the ecosystem is evolving with new alternatives.
 
 ## Current Status (January 2026)
 
