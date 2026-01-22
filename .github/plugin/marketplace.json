@@ -9,7 +9,10 @@
       "name": "workiq",
       "source": "plugins/workiq",
       "description": "WorkIQ plugin for GitHub Copilot.",
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "skills": [
+        "./skills/workiq"
+      ]
     }
   ]
 }
