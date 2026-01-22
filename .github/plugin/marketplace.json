@@ -4,6 +4,10 @@
     "description": "GitHub Copilot plugins",
     "version": "1.0.0"
   },
+  "owner": {
+    "name": "GitHub",
+    "email": "copilot@github.com"
+  },
   "plugins": [
     {
       "name": "workiq",
