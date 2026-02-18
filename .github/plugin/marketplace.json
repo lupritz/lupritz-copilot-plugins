@@ -26,6 +26,15 @@
       "skills": [
         "./skills/spark"
       ]
+    },
+    {
+      "name": "dataverse-mcp-setup",
+      "source": "plugins/dataverse-mcp-setup",
+      "description": "Dataverse MCP setup plugin for GitHub Copilot.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/dataverse-mcp-setup"
+      ]
     }
   ]
 }
