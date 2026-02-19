@@ -132,7 +132,7 @@ def list_environments() -> int:
     use_tip = os.environ.get("MCP_SETUP_USETIP", "").lower() in ("true", "1", "yes")
 
     if use_tip:
-        url = "https://tip1.api.bap.microsoft.com/providers/Microsoft.BusinessAppPlatform/scopes/admin/environments"
+        url = "https://tip1.api.bap.microsoft.com/providers/Microsoft.BusinessAppPlatform/scopes/admin/environments?api-version=2023-06-01"
     else:
         url = "https://api.powerapps.com/providers/Microsoft.PowerApps/environments?api-version=2016-11-01"
 
