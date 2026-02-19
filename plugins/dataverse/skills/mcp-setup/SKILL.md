@@ -1,36 +1,22 @@
 ---
-description: Configure your Dataverse environment for the MCP server
+description: Configure an MCP server for GitHub Copilot with your Dataverse environment
 ---
 
-# Setup Dataverse MCP
+# Setup Dataverse MCP for GitHub Copilot
 
-This skill configures the Dataverse MCP server with your organization's environment URL. If the user provided a URL it is: $ARGUMENTS.
+This skill configures the Dataverse MCP server for GitHub Copilot with your organization's environment URL. Each organization is registered with a unique server name based on the org identifier (e.g., `DataverseMcporgbc9a965c`). If the user provided a URL it is: $ARGUMENTS.
 
 ## Instructions
 
-### 0. Detect available tools and check already-configured MCP servers
+### 0. Check already-configured MCP servers
 
-First, detect which tools are available on the system:
-
-```bash
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py detect-tools
-```
-
-This returns JSON indicating which tools are available:
-```json
-{
-  "claude": true,
-  "copilot": true
-}
-```
-
-Then check already-configured MCP servers by running the `get-configured` command. You can optionally specify `--tool` to check only a specific tool (claude, copilot, or both):
+Check already-configured MCP servers by running the `get-configured` command:
 
 ```bash
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py get-configured --tool both
+python3 /path/to/skills/mcp-setup/mcp_setup.py get-configured
 ```
 
-The script checks the specified tool(s) and outputs a JSON array of MCP server URLs that are already registered, for example:
+The script outputs a JSON array of MCP server URLs that are already registered in the Copilot configuration, for example:
 
 ```json
 ["https://orgfbb52bb7.crm.dynamics.com/api/mcp"]
@@ -43,7 +29,7 @@ Store this list as `CONFIGURED_URLS`. If the script fails for any reason, treat 
 Run the `mcp_setup.py` script with the `list-environments` command, located in the same directory as this skill file:
 
 ```bash
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py list-environments
+python3 /path/to/skills/mcp-setup/mcp_setup.py list-environments
 ```
 
 The script uses the Azure CLI to authenticate and calls the Power Apps API to retrieve all environments where `databaseType` is `CommonDataService`. It outputs a JSON array to stdout:
@@ -96,60 +82,41 @@ If Generally Available (GA) use `/api/mcp`
 
 When setting up the MCP configuration.
 
-### 5. Determine which tool to configure
+### 5. Register the MCP server
 
-Based on the context (is this running in Claude or Copilot?) and user preference, determine which tool should be configured. The options are:
-- `claude` - Configure only Claude Code CLI
-- `copilot` - Configure only GitHub Copilot
-- `both` - Configure both tools (if available)
-
-### 6. Register the MCP server
-
-Run the `mcp_setup.py` script with the `configure` command. Pass the validated environment URL, the chosen endpoint type (`preview` or `ga`), and the `--tool` parameter.
+Run the `mcp_setup.py` script with the `configure` command. Pass the validated environment URL and the chosen endpoint type (`preview` or `ga`).
 
 ```bash
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py configure "USER_URL" "ENDPOINT_TYPE" --tool "TOOL_CHOICE"
+python3 /path/to/skills/mcp-setup/mcp_setup.py configure "USER_URL" "ENDPOINT_TYPE"
 ```
 
 For example:
 ```bash
-# Configure only Claude CLI
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py configure "https://org.crm.dynamics.com" "ga" --tool claude
-
-# Configure only Copilot
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py configure "https://org.crm.dynamics.com" "ga" --tool copilot
-
-# Configure both (if both are available)
-python3 /path/to/skills/dataverse-mcp-setup/mcp_setup.py configure "https://org.crm.dynamics.com" "ga" --tool both
+python3 /path/to/skills/mcp-setup/mcp_setup.py configure "https://org.crm.dynamics.com" "ga"
 ```
 
-The script will:
-- **For Claude** — runs `claude mcp add --scope user` to register the server directly (if Claude CLI is installed)
-- **For Copilot** — merges the `Dataverse` entry into `mcp-config.json` without overwriting other entries
+The script will merge a uniquely-named Dataverse entry (e.g., `DataverseMcporgbc9a965c`) into the Copilot `mcp-config.json` file without overwriting other entries. This allows you to configure multiple Dataverse organizations.
 
 Interpret the exit code as follows:
 
-- **Exit 0 — success.** Proceed to step 7.
-- **Any other non-zero exit code — error.** Report the error output to the user and proceed to step 8 (Troubleshooting).
+- **Exit 0 — success.** Proceed to step 6.
+- **Any other non-zero exit code — error.** Report the error output to the user and proceed to step 7 (Troubleshooting).
 
-### 7. Confirm success and instruct restart
+### 6. Confirm success and instruct restart
 
 Tell the user:
 
-> ✅ Dataverse MCP server configured for `USER_URL`.
+> ✅ Dataverse MCP server configured for GitHub Copilot at `USER_URL`.
 >
-> **IMPORTANT: You must restart your session for the changes to take effect.**
+> **IMPORTANT: You must restart your editor for the changes to take effect.**
 >
-> - If using Claude Code: Exit this session completely and start a new one
-> - If using GitHub Copilot: Restart your editor or reload the window
->
-> Once restarted, you will be able to:
+> Restart your editor or reload the window, then you will be able to:
 > - List all tables in your Dataverse environment
 > - Query records from any table
 > - Create, update, or delete records
 > - Explore your schema and relationships
 
-### 8. Troubleshooting
+### 7. Troubleshooting
 
 If something goes wrong, help the user check:
 
@@ -158,4 +125,3 @@ If something goes wrong, help the user check:
 - The environment URL matches what's shown in the Power Platform Admin Center
 - Their Environment Admin has enabled "Dataverse CLI MCP" in the Allowed Clients list
 - Their Environment has Dataverse MCP enabled, and if they're trying to use the preview endpoint that is enabled.
-- Their agent supports HTTP-based MCP servers with OAuth

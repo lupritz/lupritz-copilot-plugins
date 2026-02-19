@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 mcp_setup.py:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}
