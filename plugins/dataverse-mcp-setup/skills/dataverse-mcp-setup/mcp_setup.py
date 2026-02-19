@@ -260,7 +260,7 @@ def configure_copilot(mcp_url: str) -> None:
 
     # Add or update Dataverse entry (no OAuth client ID needed for Copilot)
     config[servers_key][SERVER_NAME] = {
-        "command": "http",
+        "type": "http",
         "url": mcp_url,
     }
 
